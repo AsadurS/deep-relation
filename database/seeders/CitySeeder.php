@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Address;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Employee;
@@ -19,10 +20,12 @@ class CitySeeder extends Seeder
         $users = Country::factory()->has(
             City::factory()->has(
                 Shop::factory()->has(
-                    Employee::factory()->count(rand(10, 15), 'employees')
+                    Employee::factory()->has(
+                        Address::factory()->count(rand(2, 3), 'address')
+                    )->count(rand(5, 10), 'employees')
                 )
                     ->count(rand(2, 4), 'shops'))
-                ->count(30)
+                ->count(20)
         )->count(rand(2, 4), 'cities')
             ->count(10)
             ->create();

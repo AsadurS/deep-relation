@@ -14,7 +14,7 @@ class Country extends Model
     {
         return $this->hasMany(City::class);
     }
-
+    #[LodataRelationship]
     public function shops(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
     {
         return $this->hasManyThrough(Shop::class,City::class);
@@ -23,5 +23,10 @@ class Country extends Model
     public function employees(): \Staudenmeir\EloquentHasManyDeep\HasManyDeep
     {
         return $this->hasManyDeep(Employee::class, [City::class, Shop::class]);
+    }
+    #[LodataRelationship]
+    public function addresses(): \Staudenmeir\EloquentHasManyDeep\HasManyDeep
+    {
+        return $this->hasManyDeep(Address::class, [City::class, Shop::class, Employee::class]);
     }
 }

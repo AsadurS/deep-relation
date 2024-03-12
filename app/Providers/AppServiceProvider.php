@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\City;
 use App\Models\Country;
+use App\Models\Employee;
 use Flat3\Lodata\Facades\Lodata;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         if (!App::runningInConsole()) {
             Lodata::discover(City::class);
             Lodata::discover(Country::class);
+            Lodata::discover(Employee::class);
         }
     }
 }
